@@ -1,26 +1,46 @@
 package basic;
 
 public class ArrayList {
+	private int maxSize = 5;
 	private int size = 0;
-	private Object[] elementData = new Object[100]; // 100개의 데이터를 수용할 수 있음.
+	private Object[] elementData = new Object[maxSize]; // maxSize개의 데이터를 수용할 수 있음.
 	
 	public boolean addLast(Object element) { // list 마지막 위치에 데이터 추가하기.
-		elementData[size] = element;
-		size++;
+		if (size>=maxSize) {
+			System.out.println(size);
+			maxSize += 100;
+			elementData = resize();
+			this.addLast(element);
+		} else {
+			elementData[size] = element;
+			size++;
+		}
 		return true;
 	}
 	
-	public boolean add(int index,Object element) {
-		if (size>=100) {
-			return false;
-		} 
-		
-		for(int i=size;i>index;i--) {
-			elementData[i] = elementData[i-1];
+	public Object[] resize() {
+		Object[] newElementData = new Object[maxSize];
+		for(int i=0; i<size; i++) {
+			if(elementData[i]!=null) {
+				newElementData[i] = elementData[i];
+			}
 		}
-		
-		elementData[index] = element;
-		size++;
+		return newElementData;
+	}
+	
+	public boolean add(int index,Object element) {
+		if (size>=maxSize) {
+			maxSize += 100;
+			elementData = resize();
+			this.add(index,element);
+		} else {
+			for(int i=size;i>index;i--) {
+				elementData[i] = elementData[i-1];
+			}
+			
+			elementData[index] = element;
+			size++;
+		}
 		return true;
 	}
 	
@@ -54,5 +74,17 @@ public class ArrayList {
 			}
 		}
 		return -1;
+	}
+	
+	public boolean remove(int index) {
+		elementData[index] = null;
+		for(int i=index;i<size-1;i++) {
+			elementData[i] = elementData[i+1];
+		}
+		if(size<1) {
+			elementData[size-1] = null;
+		}
+		size--;
+		return true;
 	}
 }
