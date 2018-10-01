@@ -68,4 +68,34 @@ class LinkedList:
         self.nodeCount +=1 
         return True
 
+    def popAt(self, pos):
+        """
+        pos가 1일때 self.head = self.head.next
+        pos가 마지막일때  self.tail = prev
+        유일한 노드를 삭제할 때  유일한 노드 = self.head = 1 , self.tail = 1
+        :param pos: 위치
+        :return:
+        """
+        if pos < 1 or pos > self.nodeCount: 
+            raise IndexError
+        result = 0
+        if pos == 1:
+            if pos == self.nodeCount: # 유일한 노드
+                self.tail = None
+            result = self.head.data
+            self.head = self.head.next
+
+        else:
+            prev = self.getAt(pos-1)
+            curr = prev.next
+            prev.next = curr.next
+            result = curr.data
+            if pos == self.nodeCount:
+                self.tail = prev
+
+        self.nodeCount -= 1;
+        return result
+
+
+
 
