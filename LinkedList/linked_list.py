@@ -39,11 +39,10 @@ class LinkedList:
 
         answer = []
         curr = self.head
-        next = 0
 
-        while next is not None:
+        while curr is not None:
             answer.append(curr.data)
-            next = curr.next
+            curr = curr.next
 
         return answer
 
