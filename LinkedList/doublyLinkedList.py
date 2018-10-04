@@ -85,13 +85,20 @@ class DoublyLinkedList:
         prev = self.getAt(pos - 1)
         return self.popAfter(prev)
 
+    def concat(self, L):
+        if self.nodeCount == 0 and L.nodeCount > 0:
+            self.head.next = L.head.next
+            self.tail.prev = L.tail.prev
+            L.head.next.prev = self.head
+            L.tail.prev.next = self.tail
 
-a = Node(10)
-b = Node(20)
-c = Node(30)
+            self.nodeCount += L.nodeCount
+        elif self.nodeCount > 0 and L.nodeCount > 0:
+            last = self.tail.prev
+            last.next = L.head.next
+            self.tail.prev = L.tail.prev
+            L.head.next.prev = last
+            L.tail.prev.next = self.tail
+            self.nodeCount += L.nodeCount
 
-L = DoublyLinkedList()
 
-L.insertAt(1,a)
-L.insertAt(2,b)
-print(L.traverse())

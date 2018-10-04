@@ -95,6 +95,21 @@ class LinkedList:
         self.nodeCount -= 1;
         return result
 
+a = Node(10)
+b = Node(20)
+c = Node(30)
+
+L = LinkedList()
+L2 = LinkedList()
+
+L.insertAt(1,a)
+L.insertAt(2,b)
+
+L2.insertAt(1,c)
+L2.insertAt(2,b)
+
+print(L)
+print(L2)
 
 
 
