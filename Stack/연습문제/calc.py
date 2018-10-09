@@ -67,6 +67,7 @@ def infix_to_potfix(token_list):
     while not opStack.isEmpty():
         result.append(opStack.pop())
 
+    print(result)
     return result
 
 def post_fix_eval(expr):
@@ -100,4 +101,4 @@ def post_fix_eval(expr):
     return val_stack.pop()
 
 
-print(post_fix_eval(infix_to_potfix(split_tokens("1+2*3"))))
+print(post_fix_eval(infix_to_potfix(split_tokens("1*((1+2)*(3+4))"))))
