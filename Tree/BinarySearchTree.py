@@ -78,9 +78,49 @@ class BinarySearchTree:
             return None, None
 
     def remove(self, key):
-        """
-        TODO
-        :param key:
-        :return:
-        """
-        pass
+        node, parent = self.lookup(key)
+        if node:
+            nChildren = node.countChildren()
+            if nChildren == 0:
+                if parent:
+                    if parent.left == node:
+                        parent.left = None
+                    elif parent.right == node:
+                        parent.right = None
+                else: # root 노드일 경우
+                    self.root = None
+            elif nChildren == 1:
+                if node.left:
+                    child = node.left
+                elif node.right:
+                    child = node.right
+
+                if parent:
+                    if parent.left == node:
+                        parent.left = child
+                    elif parent.right == node:
+                        parent.right = child
+                else:
+                    self.root = child
+            else: # 자식이 2명 이상일 경우
+                parent = node
+                successor = node.right # 노드보다 큰 값 중 하나 큰 값을 찾음. -> successor
+
+                while successor.left: # successor를 찾음
+                    parent = successor
+                    successor = successor.left
+
+                node.key = successor.key
+                node.data = successor.data
+
+                if parent.left == successor:
+                    parent.left = successor.right
+                elif parent.right == successor:
+                    parent.right = successor.right
+
+            return True
+
+        else:
+            return False
+
+
