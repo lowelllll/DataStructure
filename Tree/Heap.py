@@ -52,6 +52,28 @@ class MaxHeap: # 최대 힙
             self.max_heapify(smallest)
 
 
+def heap_sort(unsorted):
+    """
+    힙을 활용한 정렬 알고리즘
+    힙 삽입의 시간 복잡도 O(logn)
+    삭제의 시간 복잡도 O(logn)
+    => O(nlogn) 복잡도
+    :return:
+    """
+    h = MaxHeap()
+    sorted = []
+
+    for data in unsorted:
+        h.insert(data)
+
+    d = h.remove()
+    while d:
+        sorted.append(d)
+        d = h.remove()
+
+    return sorted
+
+
 
 h = MaxHeap()
 
@@ -65,3 +87,6 @@ h.insert(4)
 h.remove()
 
 print(h.data)
+
+# 힙정렬(내림차순)
+print(heap_sort([4,6,5,7,2,9,1,3,8]))
