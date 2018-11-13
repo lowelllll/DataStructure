@@ -39,17 +39,17 @@ class MaxHeap: # 최대 힙
     def max_heapify(self, idx):
         left = idx * 2
         right = (idx * 2)+1
-        smallest = idx
+        biggest = idx
 
-        if left < len(self.data) and self.data[left] > self.data[smallest]:
-            smallest = left
+        if left < len(self.data) and self.data[left] > self.data[biggest]:
+            biggest = left
 
-        if right < len(self.data) and self.data[right] > self.data[smallest]:
-            smallest = right
+        if right < len(self.data) and self.data[right] > self.data[biggest]:
+            biggest = right
 
-        if smallest != idx: # 현재 idx가 최댓값의 idx가 아니면
-            self.data[idx], self.data[smallest] = self.data[smallest], self.data[idx]
-            self.max_heapify(smallest)
+        if biggest != idx: # 현재 idx가 최댓값의 idx가 아니면
+            self.data[idx], self.data[biggest] = self.data[biggest], self.data[idx]
+            self.max_heapify(biggest)
 
 
 class MinHeap: # 최소 힙
@@ -83,17 +83,17 @@ class MinHeap: # 최소 힙
     def minHeapify(self, idx):
         left = idx * 2
         right = (idx * 2) + 1
-        biggest = idx
+        smallest = idx
 
-        if len(self.data) > left and self.data[left] < self.data[biggest]:
-            biggest = left
+        if len(self.data) > left and self.data[left] < self.data[smallest]:
+            smallest = left
 
-        if len(self.data) > right and self.data[right] < self.data[biggest]:
-            biggest = right
+        if len(self.data) > right and self.data[right] < self.data[smallest]:
+            smallest = right
 
-        if biggest != idx:
-            self.data[biggest], self.data[idx] = self.data[idx], self.data[biggest]
-            self.minHeapify(biggest)
+        if smallest != idx:
+            self.data[smallest], self.data[idx] = self.data[idx], self.data[smallest]
+            self.minHeapify(smallest)
 
 
 
