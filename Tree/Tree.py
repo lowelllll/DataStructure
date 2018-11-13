@@ -88,7 +88,7 @@ class BinaryTree:
 
     def depth(self):
         if self.root:
-            return self.root.size()
+            return self.root.depth()
         else:
             return 0
 
